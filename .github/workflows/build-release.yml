@@ -10,6 +10,9 @@ env:
   PACKAGE_NAME: luci-app-xray
   CACHE_DIR: ~/cache
 
+permissions:
+  contents: write
+
 jobs:
   release:
     name: Build for ${{ matrix.arch }} (${{ matrix.id }})
@@ -118,7 +121,7 @@ jobs:
           done
           find "${{ github.workspace }}" -maxdepth 1 -type f \( -name "*.ipk" -o -name "*.apk" \) -exec ls -lh {} \;
       - name: Release and Upload Assets
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             *.ipk
